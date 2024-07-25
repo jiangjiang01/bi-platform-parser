@@ -63,15 +63,22 @@ class DataParser {
   }
 
   writeOperateRecordFile(file) {
-    const ans = [`### 用户手机号: ${this.data[0].operator_phone} '操作记录:`];
+    const ans = [
+      `### 用户手机号: ${this.data[0].operator_phone} 操作记录:`,
+      `| 操作时间  | 当前页面 | 页面参数 | ，前置页面 | 操作对象 |`,
+      `| --------- | -------- | -------- | -------- | -------- |`,
+    ];
     this.data.forEach((item, index) => {
       ans.push(
-        `${index + 1}. 操作时间: ${item.operate_data?.operate_at}, 当前页面:${
-          item.operate_page_url
-        }, 前置页面:${item.operate_object_name}, 页面参数:${
-          item.operate_page_query
-        }`
+        `| ${item.operate_data?.operate_at} | ${item.operate_page_url} | ${item.operate_page_query} | ${item.operate_data?.forward_url} | ${item.operate_object_name} |`
       );
+      // ans.push(
+      //   `${index + 1}. 操作时间: ${item.operate_data?.operate_at}, 当前页面:${
+      //     item.operate_page_url
+      //   },  页面参数:${item.operate_page_query}，前置页面:${
+      //     item.operate_data?.forward_url
+      //   }, 操作对象:${item.operate_object_name},`
+      // );
     });
     // console.log('用户手机号:', this.data[0].operator_phone, '操作记录:');
     // console.log(ans);
